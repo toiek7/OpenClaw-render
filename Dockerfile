@@ -2,5 +2,5 @@ FROM ghcr.io/openclaw/openclaw:latest
 
 EXPOSE 18789
 
-# Direct execution of the running server without initial command scripting
-CMD ["node", "dist/index.js", "gateway"]
+# Force launch using headless environment variables and skip initial file checks
+CMD ["node", "dist/index.js", "gateway", "--allow-unconfigured"]
