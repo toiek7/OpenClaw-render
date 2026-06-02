@@ -1,9 +1,13 @@
 FROM ghcr.io/openclaw/openclaw:latest
 
-EXPOSE 18789
+# Reset the image entrypoint so Render can pass direct arguments to Node
+ENTRYPOINT []
 
-# Force launch using headless environment variables and skip initial file checks
+# Explicitly use production flags and set the fallback port
+ENV NODE_ENV=production
+ENV PORT=10000
+
+EXPOSE 10000
+
+# Execute Node directly bypassing the strict openclaw CLI check
 CMD ["node", "dist/index.js", "gateway", "--allow-unconfigured", "--host", "0.0.0.0", "--port", "10000"]
-
-
-
